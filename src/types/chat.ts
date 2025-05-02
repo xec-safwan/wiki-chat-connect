@@ -12,3 +12,8 @@ export interface ChatProps {
   currentPage: string;
   className?: string;
 }
+
+export interface ChatState {
+  messages: Message[];
+  isTyping: boolean;
+}

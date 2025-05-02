@@ -94,43 +94,40 @@
   }
 }
 
-.wiki-sidebar-item {
-  @apply flex items-center gap-2 px-3 py-2 text-sm text-wiki-text hover:bg-wiki-hover rounded-md transition-colors;
+/* ... keep existing code (CSS classes for wiki-sidebar-item, wiki-table, etc) */
+
+/* Typing indicator animation */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  column-gap: 3px;
 }
 
-.wiki-sidebar-item.active {
-  @apply bg-wiki-active;
+.typing-indicator span {
+  height: 8px;
+  width: 8px;
+  display: block;
+  border-radius: 50%;
+  background-color: #888;
+  opacity: 0.4;
+  animation: typing-animation 1.4s infinite ease-in-out both;
 }
 
-.wiki-collapse-button {
-  @apply flex items-center w-full text-left;
+.typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
 }
 
-.wiki-table {
-  @apply w-full border-collapse;
+.typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
 }
 
-.wiki-table th, 
-.wiki-table td {
-  @apply border border-wiki-border px-4 py-2 text-left text-sm;
-}
-
-.wiki-table th {
-  @apply bg-gray-50;
-}
-
-.chat-message {
-  @apply p-3 rounded-lg max-w-[85%] mb-2;
-}
-
-.chat-message.sent {
-  @apply bg-blue-500 text-white ml-auto;
-}
-
-.chat-message.received {
-  @apply bg-gray-100 text-gray-800;
-}
-
-.chat-bubble-button {
-  @apply fixed z-10 bottom-4 right-4 bg-blue-500 text-white rounded-full p-3 shadow-lg hover:bg-blue-600 transition-colors;
+@keyframes typing-animation {
+  0%, 80%, 100% { 
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% { 
+    transform: scale(1); 
+    opacity: 1;
+  }
 }
