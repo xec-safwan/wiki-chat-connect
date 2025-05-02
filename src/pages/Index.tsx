@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import WikiSidebar from '@/components/layout/WikiSidebar';
 import AcronymsPage from '@/components/wiki/AcronymsPage';
 import ChatPanel from '@/components/chat/ChatPanel';
@@ -9,11 +9,12 @@ const Index = () => {
   const [isChatOpen, setIsChatOpen] = useState(true);
   const [showWikiContent, setShowWikiContent] = useState(false);
   const [currentPage, setCurrentPage] = useState('Acronyms');
-  const [hasUnread, setHasUnread] = useState(true);
-  const [unreadCount, setUnreadCount] = useState(2);
+  const [hasUnread, setHasUnread] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   const handleOpenChat = () => {
     setIsChatOpen(true);
+    setShowWikiContent(false);
     setHasUnread(false);
     setUnreadCount(0);
   };
