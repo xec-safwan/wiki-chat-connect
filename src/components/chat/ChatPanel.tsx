@@ -1,10 +1,10 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, X, MinusCircle, Users, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar } from '@/components/ui/avatar';
 import { Textarea } from '@/components/ui/textarea';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { cn } from '@/lib/utils';
 
 // Sample mock data for messages
 const initialMessages = [
@@ -27,9 +27,10 @@ interface ChatPanelProps {
   isOpen: boolean;
   onClose: () => void;
   currentPage: string;
+  className?: string;
 }
 
-const ChatPanel: React.FC<ChatPanelProps> = ({ isOpen, onClose, currentPage }) => {
+const ChatPanel: React.FC<ChatPanelProps> = ({ isOpen, onClose, currentPage, className }) => {
   const [messages, setMessages] = useState(initialMessages);
   const [newMessage, setNewMessage] = useState('');
   const [showUserList, setShowUserList] = useState(false);
@@ -58,11 +59,14 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ isOpen, onClose, currentPage }) =
     }
   };
 
+  // Use the className prop with the cn utility to combine classes
+  const panelClasses = cn(
+    `${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col`,
+    className ? className : 'fixed top-0 right-0 h-full w-80 bg-white border-l border-wiki-border shadow-lg transition-transform duration-300 z-20'
+  );
+
   return (
-    <div 
-      className={`fixed top-0 right-0 h-full w-80 bg-white border-l border-wiki-border shadow-lg transition-transform duration-300 z-20 
-                ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col`}
-    >
+    <div className={panelClasses}>
       <div className="flex items-center justify-between px-4 py-3 border-b border-wiki-border">
         <div className="flex items-center gap-2">
           <MessageSquare size={18} className="text-blue-500" />

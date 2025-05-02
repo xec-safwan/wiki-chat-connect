@@ -6,7 +6,8 @@ import ChatPanel from '@/components/chat/ChatPanel';
 import ChatBubble from '@/components/chat/ChatBubble';
 
 const Index = () => {
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(true);
+  const [showWikiContent, setShowWikiContent] = useState(false);
   const [currentPage, setCurrentPage] = useState('Acronyms');
   const [hasUnread, setHasUnread] = useState(true);
   const [unreadCount, setUnreadCount] = useState(2);
@@ -20,6 +21,16 @@ const Index = () => {
   const handleSelectWikiItem = (item: any) => {
     if (item.title) {
       setCurrentPage(item.title);
+      setShowWikiContent(true);
+      setIsChatOpen(false);
+    }
+  };
+
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+    if (!isChatOpen) {
+      setHasUnread(false);
+      setUnreadCount(0);
     }
   };
 
@@ -32,23 +43,30 @@ const Index = () => {
       
       {/* Main content */}
       <div className="flex-1 overflow-y-auto p-6 relative">
-        <AcronymsPage />
-        
-        {/* Chat bubble button */}
-        {!isChatOpen && (
-          <ChatBubble 
-            onClick={handleOpenChat}
-            hasUnread={hasUnread}
-            unreadCount={unreadCount}
-          />
+        {showWikiContent ? (
+          <div>
+            <h1 className="text-2xl font-bold mb-6">{currentPage}</h1>
+            <AcronymsPage />
+            
+            {/* Chat bubble button when chat is minimized */}
+            {!isChatOpen && (
+              <ChatBubble 
+                onClick={handleOpenChat}
+                hasUnread={hasUnread}
+                unreadCount={unreadCount}
+              />
+            )}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <ChatPanel 
+              isOpen={true}
+              onClose={toggleChat}
+              currentPage={currentPage}
+              className="relative w-full max-w-3xl mx-auto h-[80vh] shadow-xl rounded-lg border border-gray-200"
+            />
+          </div>
         )}
-        
-        {/* Chat panel */}
-        <ChatPanel 
-          isOpen={isChatOpen} 
-          onClose={() => setIsChatOpen(false)}
-          currentPage={currentPage}
-        />
       </div>
     </div>
   );
