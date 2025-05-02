@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -98,4 +92,45 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.wiki-sidebar-item {
+  @apply flex items-center gap-2 px-3 py-2 text-sm text-wiki-text hover:bg-wiki-hover rounded-md transition-colors;
+}
+
+.wiki-sidebar-item.active {
+  @apply bg-wiki-active;
+}
+
+.wiki-collapse-button {
+  @apply flex items-center w-full text-left;
+}
+
+.wiki-table {
+  @apply w-full border-collapse;
+}
+
+.wiki-table th, 
+.wiki-table td {
+  @apply border border-wiki-border px-4 py-2 text-left text-sm;
+}
+
+.wiki-table th {
+  @apply bg-gray-50;
+}
+
+.chat-message {
+  @apply p-3 rounded-lg max-w-[85%] mb-2;
+}
+
+.chat-message.sent {
+  @apply bg-blue-500 text-white ml-auto;
+}
+
+.chat-message.received {
+  @apply bg-gray-100 text-gray-800;
+}
+
+.chat-bubble-button {
+  @apply fixed z-10 bottom-4 right-4 bg-blue-500 text-white rounded-full p-3 shadow-lg hover:bg-blue-600 transition-colors;
 }
